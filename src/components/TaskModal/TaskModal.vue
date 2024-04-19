@@ -13,7 +13,10 @@
             <v-col cols="12" sm="12">
               <v-textarea label="Description" v-model="description"></v-textarea>
             </v-col>
-
+            <v-col cols="12" sm="12">
+              Due date
+              <datepicker v-model="dueDate" />
+            </v-col>
           </v-row>
 
           <small class="text-caption text-medium-emphasis">*indicates required field</small>
