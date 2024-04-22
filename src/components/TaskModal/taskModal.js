@@ -13,7 +13,6 @@ export default {
     },
     data() {
         return {
-            dialog: false,
             title: '',
             description: '',
             dueDate: '',
@@ -25,11 +24,18 @@ export default {
         },
         onSave() {
             const newTask = {
-                title: this.title,
-                description: this.description,
-                dueDate: this.dueDate
+                title: this.title.trim(),
+                description: this.description
+            }
+            if (this.dueDate) {
+                newTask.date = this.dueDate.toISOString().slice(0, 10)
             }
             this.$emit('taskSave', newTask)
+        }
+    },
+    computed: {
+        isTitleValid() {
+            return !!this.title.trim();
         }
     }
 }
