@@ -1,49 +1,46 @@
 <template>
-  <div class="pa-4 text-center">
-    <v-dialog v-model="isOpen" max-width="600">
+  <template>
+    <div class="pa-4 text-center">
+      <v-dialog :modelValue="isOpen" @update:modelValue="onClose" max-width="600">
+        <v-card prepend-icon="mdi-account" title="User Profile">
+          <v-card-text>
+            <v-row dense>
+              <v-col cols="12" sm="12">
+                <v-text-field :class="{ invalid: !isTitleValid }" label="Title*" required
+                  v-model="title"></v-text-field>
+              </v-col>
 
-      <v-card prepend-icon="mdi-account" title="User Profile">
-        <v-card-text>
-          <v-row dense>
-            <v-col cols="12" sm="12">
-              <v-text-field :class="{ 'invalid': !isTitleValid }" label="Title*" required
-                v-model="title"></v-text-field>
-            </v-col>
+              <v-col cols="12" sm="12">
+                <v-textarea label="Description" v-model="description"></v-textarea>
+              </v-col>
+              <v-col cols="12" sm="12">
+                Due date
+                <datepicker v-model="dueDate" />
+              </v-col>
+            </v-row>
 
+            <small class="text-caption text-medium-emphasis">*indicates required field</small>
+          </v-card-text>
 
-            <v-col cols="12" sm="12">
-              <v-textarea label="Description" v-model="description"></v-textarea>
-            </v-col>
-            <v-col cols="12" sm="12">
-              Due date
-              <datepicker v-model="dueDate" />
-            </v-col>
-          </v-row>
+          <v-divider></v-divider>
 
-          <small class="text-caption text-medium-emphasis">*indicates required field</small>
-        </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
 
+            <v-btn color="warning" text="Close" variant="plain" @click="onClose"></v-btn>
 
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn text="Close" variant="plain" @click="onClose" color="warning"></v-btn>
-
-          <v-btn text="Save" :disabled="!isTitleValid" variant="tonal" @click="onSave" color="success">
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </div>
+            <v-btn :disabled="!isTitleValid" color="success" text="Save" variant="tonal" @click="onSave"></v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+  </template>
 </template>
 
 <script src="./taskModal.js"></script>
 
 <style>
-.invalid>.v-input__control {
+.invalid .v-input__control {
   border: 1px solid red;
 }
 </style>

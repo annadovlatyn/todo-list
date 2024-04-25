@@ -1,19 +1,29 @@
 <template>
 
-  <v-col cols="12" sm="4">
-    <v-container>
-      <v-checkbox label="Checkbox"></v-checkbox>
-    </v-container>
-    <v-card class="mx-auto my-8" elevation="16" max-width="344">
-      <v-card-item>
-        <v-card-title> {{ data.title }}</v-card-title>
-      </v-card-item>
-      <v-card-text>{{ data.description }} </v-card-text>
-      <v-card-text> <span>Status: </span>{{ data.status }} </v-card-text>
-      <v-card-text> <span>Created At: </span> {{ createdAt }} </v-card-text>
-      <v-card-text> <span>Due Date: </span> {{ dueDate }} </v-card-text>
-    </v-card>
-  </v-col>
+  <v-card class="mx-auto my-8 w-100" elevation="10" max-width="344">
+    <v-card-item class="pa-2 pl-4">
+      <v-checkbox class="mb-n6 mx-n1"></v-checkbox>
+      <v-card-title> {{ data.title }}</v-card-title>
+    </v-card-item>
+    <v-card-text class="pa-2 pl-4">{{ data.description }} </v-card-text>
+    <v-card-text class="pa-2 pl-4"> <b>Status: </b>{{ data.status }} </v-card-text>
+    <v-card-text class="pa-2 pl-4"> <b>Created At: </b> {{ createdAt }} </v-card-text>
+    <v-card-text class="pa-2 pl-4"> <b>Due Date: </b> {{ dueDate }} </v-card-text>
+
+    <v-card-actions>
+      <v-btn color="success" variant="elevated">
+        <v-icon icon="mdi-check-outline" />
+      </v-btn>
+      <v-btn color="warning" variant="elevated">
+        <v-icon icon="mdi-archive-edit-outline" />
+      </v-btn>
+      <v-btn color="error" variant="elevated">
+        <v-icon icon="mdi-delete-outline" />
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+
+
 
 
 </template>
