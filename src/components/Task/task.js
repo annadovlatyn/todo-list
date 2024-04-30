@@ -5,7 +5,6 @@ export default {
             type: Object,
             required: true
         },
-        ex4: "",
 
     },
     computed: {
