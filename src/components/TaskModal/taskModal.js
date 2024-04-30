@@ -31,6 +31,12 @@ export default {
                 newTask.date = this.dueDate.toISOString().slice(0, 10)
             }
             this.$emit('taskSave', newTask)
+        },
+        onInput(event) {
+            this.name = event.target.value
+        },
+        onTitleInput(event) {
+            this.title = event.target.value
         }
     },
     computed: {
