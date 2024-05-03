@@ -23,7 +23,6 @@ export default {
     },
     watch: {
         editingTask(newValue) {
-            console.log('editing task newValue', newValue);
             if (newValue) {
                 this.isTaskModalOpen = true
             }
@@ -58,15 +57,33 @@ export default {
                 .catch(this.handleError)
         },
         onTaskSave(editedTask) {
-            console.log('editedTask', editedTask)
             taskApi
                 .updateTask(editedTask)
                 .then((updatedTask) => {
-                    console.log('updatedTask', updatedTask)
                     const taskIndex = this.tasks.findIndex((t) => t._id === updatedTask._id)
                     this.tasks[taskIndex] = updatedTask
                     this.isTaskModalOpen = false
                     this.$toast.success('The task has been updated successfully!')
+                })
+                .catch(this.handleError)
+        },
+        onTaskStatus(editedTask) {
+            console.log('onTaskStatus', editedTask)
+            editedTask.status === 'active' ? editedTask.status = 'done' : editedTask.status = 'active';
+
+            taskApi
+                .updateTask(editedTask)
+                .then((updatedTask) => {
+                    const taskIndex = this.tasks.findIndex((t) => t._id === updatedTask._id)
+                    this.tasks[taskIndex] = updatedTask
+                    let message;
+                    if (updatedTask.status === 'done') {
+                        message = 'The task is Done successfully!'
+                    }
+                    else {
+                        message = 'The task is restored successfully!'
+                    }
+                    this.$toast.success(message)
                 })
                 .catch(this.handleError)
         },
@@ -75,6 +92,16 @@ export default {
         },
         onTaskEdit(editingTask) {
             this.editingTask = editingTask;
+        },
+
+        onTaskDelete(taskId) {
+            taskApi
+                .deleteTask(taskId)
+                .then(() => {
+                    this.tasks = this.tasks.filter((t) => t._id !== taskId)
+                    this.$toast.success('The task have been deleted successfully!')
+                })
+                .catch(this.handleError)
         }
     }
 }

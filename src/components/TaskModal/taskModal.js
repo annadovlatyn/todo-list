@@ -20,7 +20,6 @@ export default {
         }
     },
     created() {
-        console.log('editingTask- created', this.editingTask)
         if (this.editingTask) {
             const { title, description, date } = this.editingTask
             this.title = title
@@ -28,6 +27,9 @@ export default {
             this.dueDate = date ? new Date(date) : ''
         }
 
+    },
+    mounted() {
+        this.$refs.title.focus()
     },
     methods: {
         onClose() {
