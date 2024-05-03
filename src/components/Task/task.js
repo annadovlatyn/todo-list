@@ -13,5 +13,10 @@ export default {
         dueDate() {
           return this.data.date?.slice(0, 10) || "none"
         }
-    }
+    },
+    methods: {
+        onEdit() {
+            this.$emit('taskEdit')
+        }
+    },
 }

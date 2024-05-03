@@ -2,6 +2,7 @@ import TaskModal from '../TaskModal/TaskModal.vue'
 import Task from '../Task/Task.vue'
 import TaskApi from '../../utils/taskApi.js'
 
+
 const taskApi = new TaskApi()
 
 export default {
@@ -12,11 +13,26 @@ export default {
     data() {
         return {
             isTaskModalOpen: false,
-            tasks: []
+            tasks: [],
+            editingTask: null,
         }
     },
     created() {
         this.getTasks()
+
+    },
+    watch: {
+        editingTask(newValue) {
+            if (newValue) {
+                this.isTaskModalOpen = true
+            }
+
+        },
+        isTaskModalOpen(isOpen) {
+            if (!isOpen && this.editingTask) {
+                this.editingTask = null
+            }
+        }
     },
     methods: {
         toggleTaskModal() {
@@ -28,20 +44,35 @@ export default {
                 .then((tasks) => {
                     this.tasks = tasks
                 })
-                .catch((err) => {
-                    console.log('err', err)
-                })
+                .catch(this.handleError)
         },
-        onTaskSave(task) {
+        onTaskAdd(task) {
             taskApi
                 .addNewTask(task)
                 .then((newTask) => {
                     this.tasks.push(newTask)
                     this.toggleTaskModal()
+                    this.$toast.success('The task has been created successfully!')
                 })
-                .catch((err) => {
-                    console.log('err', err)
+                .catch(this.handleError)
+        },
+        onTaskSave(editedTask) {
+            console.log('editedTask', editedTask)
+            taskApi
+                .updateTask(editedTask)
+                .then((updatedTask) => {
+                    const taskIndex = this.tasks.findIndex((t) => t._id === updatedTask._id)
+                    this.tasks[taskIndex] = updatedTask
+                    this.isTaskModalOpen = false
+                    this.$toast.success('The task has been updated successfully!')
                 })
+                .catch(this.handleError)
+        },
+        handleError(err) {
+            this.$toast.error(err.message)
+        },
+        onTaskEdit(editingTask) {
+            this.editingTask = editingTask;
         }
     }
 }
