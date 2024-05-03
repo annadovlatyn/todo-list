@@ -23,7 +23,6 @@ export default {
     },
     watch: {
         editingTask(newValue) {
-            console.log('editing task newValue', newValue);
             if (newValue) {
                 this.isTaskModalOpen = true
             }
@@ -62,7 +61,6 @@ export default {
             taskApi
                 .updateTask(editedTask)
                 .then((updatedTask) => {
-                    console.log('updatedTask', updatedTask)
                     const taskIndex = this.tasks.findIndex((t) => t._id === updatedTask._id)
                     this.tasks[taskIndex] = updatedTask
                     this.isTaskModalOpen = false
