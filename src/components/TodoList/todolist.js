@@ -67,7 +67,7 @@ export default {
                 .catch(this.handleError)
         },
         onTaskStatusChange(editedTask) {
-            console.log('onTaskStatusChange', editedTask)
+           
             editedTask.status === 'active' ? editedTask.status = 'done' : editedTask.status = 'active';
 
             taskApi
