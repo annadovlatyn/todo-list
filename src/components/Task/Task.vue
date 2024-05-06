@@ -15,6 +15,17 @@
         <v-icon v-if="data.status === 'active'" icon="mdi-check-outline" />
         <v-icon v-else icon="mdi-reload" />
       </v-btn>
+
+       <!-- 
+      ---Button 2nd version --- 
+      <v-btn v-if="data.status === 'active'" color="success" variant="elevated" @click="statusChange">
+        <v-icon icon="mdi-check-outline" />
+      </v-btn>
+      <v-btn v-else color="info" variant="elevated" @click="statusChange">
+        <v-icon icon="mdi-reload" />
+      </v-btn> 
+      --- end 2nd version --- 
+      -->
       <v-btn color="warning" variant="elevated" @click="onEdit">
         <v-icon icon="mdi-archive-edit-outline" />
       </v-btn>
