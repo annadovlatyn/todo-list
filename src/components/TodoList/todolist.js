@@ -60,21 +60,20 @@ export default {
             taskApi
                 .updateTask(editedTask)
                 .then((updatedTask) => {
-                    const taskIndex = this.tasks.findIndex((t) => t._id === updatedTask._id)
-                    this.tasks[taskIndex] = updatedTask
+                    this.findAndReplaceTask(updatedTask)
                     this.isTaskModalOpen = false
                     this.$toast.success('The task has been updated successfully!')
                 })
                 .catch(this.handleError)
         },
-        onTaskStatus(editedTask) {
+        onTaskStatusChange(editedTask) {
+            console.log('onTaskStatusChange', editedTask)
             editedTask.status === 'active' ? editedTask.status = 'done' : editedTask.status = 'active';
 
             taskApi
                 .updateTask(editedTask)
                 .then((updatedTask) => {
-                    const taskIndex = this.tasks.findIndex((t) => t._id === updatedTask._id)
-                    this.tasks[taskIndex] = updatedTask
+                    this.findAndReplaceTask(updatedTask)
                     let message;
                     if (updatedTask.status === 'done') {
                         message = 'The task is Done successfully!'
@@ -86,6 +85,11 @@ export default {
                 })
                 .catch(this.handleError)
         },
+        findAndReplaceTask(updatedTask) {
+            const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
+            this.tasks[index] = updatedTask
+        },
+
         handleError(err) {
             this.$toast.error(err.message)
         },
