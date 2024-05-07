@@ -28,6 +28,9 @@ export default {
         }
 
     },
+    mounted() {
+        this.$refs.title.focus()
+    },
     methods: {
         onClose() {
             this.$emit('close')

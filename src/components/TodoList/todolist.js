@@ -57,22 +57,54 @@ export default {
                 .catch(this.handleError)
         },
         onTaskSave(editedTask) {
-            console.log('editedTask', editedTask)
             taskApi
                 .updateTask(editedTask)
                 .then((updatedTask) => {
-                    const taskIndex = this.tasks.findIndex((t) => t._id === updatedTask._id)
-                    this.tasks[taskIndex] = updatedTask
+                    this.findAndReplaceTask(updatedTask)
                     this.isTaskModalOpen = false
                     this.$toast.success('The task has been updated successfully!')
                 })
                 .catch(this.handleError)
         },
+        onTaskStatusChange(editedTask) {
+           
+            editedTask.status === 'active' ? editedTask.status = 'done' : editedTask.status = 'active';
+
+            taskApi
+                .updateTask(editedTask)
+                .then((updatedTask) => {
+                    this.findAndReplaceTask(updatedTask)
+                    let message;
+                    if (updatedTask.status === 'done') {
+                        message = 'The task is Done successfully!'
+                    }
+                    else {
+                        message = 'The task is restored successfully!'
+                    }
+                    this.$toast.success(message)
+                })
+                .catch(this.handleError)
+        },
+        findAndReplaceTask(updatedTask) {
+            const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
+            this.tasks[index] = updatedTask
+        },
+
         handleError(err) {
             this.$toast.error(err.message)
         },
         onTaskEdit(editingTask) {
             this.editingTask = editingTask;
+        },
+
+        onTaskDelete(taskId) {
+            taskApi
+                .deleteTask(taskId)
+                .then(() => {
+                    this.tasks = this.tasks.filter((t) => t._id !== taskId)
+                    this.$toast.success('The task have been deleted successfully!')
+                })
+                .catch(this.handleError)
         }
     }
 }
