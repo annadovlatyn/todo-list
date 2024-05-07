@@ -1,5 +1,6 @@
 
 export default {
+
     props: {
         data: {
             type: Object,
@@ -12,6 +13,9 @@ export default {
         },
         dueDate() {
             return this.data.date?.slice(0, 10) || "none"
+        },
+        active() {
+            return this.data.status === 'active'
         }
     },
     methods: {
