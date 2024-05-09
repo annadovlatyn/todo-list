@@ -5,7 +5,7 @@
       <v-checkbox class="mb-n6 mx-n1"></v-checkbox>
       <v-card-title> {{ data.title }}</v-card-title>
     </v-card-item>
-    <v-card-text class="pa-2 pl-4">{{ data.description }} </v-card-text>
+    <v-card-text class="pa-2 pl-4 description">{{ data.description }} </v-card-text>
     <v-card-text class="pa-2 pl-4"> <b>Status: </b>{{ data.status }} </v-card-text>
     <v-card-text class="pa-2 pl-4"> <b>Created At: </b> {{ createdAt }} </v-card-text>
     <v-card-text class="pa-2 pl-4"> <b>Due Date: </b> {{ dueDate }} </v-card-text>
@@ -33,3 +33,10 @@
 </template>
 
 <script src="./task.js"></script>
+<style scoped>
+.description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
