@@ -60,11 +60,10 @@ export default {
                 .catch(this.handleError)
         },
         statusChange() {
-            this.task.status === 'active' ? this.task.status = 'done' : this.task.status = 'active';
-
             taskApi
                 .updateTask(this.task)
                 .then((updatedTask) => {
+                    this.task.status === 'active' ? this.task.status = 'done' : this.task.status = 'active';
                     let message;
                     if (updatedTask.status === 'done') {
                         message = 'The task is Done successfully!'
