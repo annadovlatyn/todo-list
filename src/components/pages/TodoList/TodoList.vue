@@ -3,7 +3,7 @@
     <task-modal v-if="isTaskModalOpen" :isOpen="isTaskModalOpen" :editingTask="editingTask" @close="toggleTaskModal"
       @taskSave="onTaskSave" @taskAdd="onTaskAdd" />
 
-    <v-row align="center" justify="center">
+    <v-row align="center" justify="center" class="mt-3">
       <v-col cols="auto">
         <v-btn color="info" @click="toggleTaskModal">Add new task</v-btn>
       </v-col>

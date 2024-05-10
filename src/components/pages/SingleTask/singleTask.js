@@ -1,5 +1,6 @@
 import TaskModal from '../../TaskModal/TaskModal.vue'
 import TaskApi from '../../../utils/taskApi.js'
+import { mapMutations } from 'vuex'
 
 const taskApi = new TaskApi()
 
@@ -28,29 +29,39 @@ export default {
     },
 
     methods: {
+        ...mapMutations(['toggleLoading']),
         getTask() {
+            this.toggleLoading()
             taskApi
                 .getSingleTask(this.taskId)
                 .then((task) => {
                     this.task = task
                 })
                 .catch(this.handleError)
+                .finally(() => {
+                    this.toggleLoading()
+                })
         },
         toggleTaskModal() {
             this.isEditModalOpen = !this.isEditModalOpen
         },
-        onSave(editedTask) {
+        onSave(updatedTask) {
+            this.toggleLoading()
             taskApi
-                .updateTask(editedTask)
-                .then((updatedTask) => {
+                .updateTask(updatedTask)
+                .then(() => {
                     this.task = updatedTask
                     this.isEditModalOpen = false
                     this.$toast.success('The task has been updated successfully!')
                 })
                 .catch(this.handleError)
+                .finally(() => {
+                    this.toggleLoading()
+                })
         },
 
         onDelete() {
+            this.toggleLoading()
             taskApi
                 .deleteTask(this.taskId)
                 .then(() => {
@@ -58,10 +69,13 @@ export default {
                     this.$toast.success('The task has been deleted successfully!')
                 })
                 .catch(this.handleError)
+                .finally(() => {
+                    this.toggleLoading()
+                })
         },
         statusChange() {
             this.task.status === 'active' ? this.task.status = 'done' : this.task.status = 'active';
-
+            this.toggleLoading()
             taskApi
                 .updateTask(this.task)
                 .then((updatedTask) => {
@@ -75,6 +89,9 @@ export default {
                     this.$toast.success(message)
                 })
                 .catch(this.handleError)
+                .finally(() => {
+                    this.toggleLoading()
+                })
         },
         handleError(err) {
             this.$toast.error(err.message)
