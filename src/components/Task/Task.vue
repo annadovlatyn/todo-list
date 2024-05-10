@@ -26,10 +26,6 @@
       </v-btn>
     </v-card-actions>
   </v-card>
-
-
-
-
 </template>
 
 <script src="./task.js"></script>
