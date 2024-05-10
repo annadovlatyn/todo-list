@@ -61,6 +61,7 @@ export default {
                 .updateTask(editedTask)
                 .then((updatedTask) => {
                     this.findAndReplaceTask(updatedTask)
+                    this.findAndReplaceTask(updatedTask)
                     this.isTaskModalOpen = false
                     this.$toast.success('The task has been updated successfully!')
                 })
@@ -72,6 +73,7 @@ export default {
             taskApi
                 .updateTask(editedTask)
                 .then((updatedTask) => {
+                    this.findAndReplaceTask(updatedTask)
                     this.findAndReplaceTask(updatedTask)
                     let message;
                     if (updatedTask.status === 'done') {
@@ -88,7 +90,6 @@ export default {
             const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
             this.tasks[index] = updatedTask
         },
-
         handleError(err) {
             this.$toast.error(err.message)
         },
