@@ -24,7 +24,7 @@ export default {
         },
         dueDate() {
             return this.task.date?.slice(0, 10) || "none"
-        }
+        },
         active() {
             return this.task.status === 'active'
         }
