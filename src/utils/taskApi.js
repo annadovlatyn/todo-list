@@ -17,6 +17,12 @@ class TaskApi extends Api {
     updateTask(task) {
         return this.request('PUT', task._id, task)
     }
+    deleteTasks(taskIds) {
+        const body = {
+            tasks: taskIds
+        }
+        return this.request('PATCH', '', body)
+    }
 }
 
 export default TaskApi

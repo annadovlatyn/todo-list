@@ -2,7 +2,7 @@
 
   <v-card class="mx-auto my-8 w-100" elevation="10" max-width="344">
     <v-card-item class="pa-2 pl-4">
-      <v-checkbox class="mb-n6 mx-n1"></v-checkbox>
+      <v-checkbox @click="onSelect" :checked="isSelected" class="mb-n6 mx-n1"></v-checkbox>
       <v-card-title> {{ data.title }}</v-card-title>
     </v-card-item>
     <v-card-text class="pa-2 pl-4 description">{{ data.description }} </v-card-text>

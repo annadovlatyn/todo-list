@@ -1,7 +1,7 @@
 <template>
   <v-layout class="footerContainer">
     <v-footer class="bg-grey-lighten-2 d-flex flex-column">
-      <v-row justify="center" no-gutters class="py-3 mb-2">
+      <v-row justify="center" no-gutters class="pa-1 mb-1">
         <v-btn class="py-1" v-for="navLink in navLinks" :key="navLink.title" variant="text">
           <RouterLink :to="navLink.path" class="text-decoration-none active-link footer-nav">{{ navLink.title }}
           </RouterLink>
@@ -18,7 +18,7 @@
 
       <v-row justify="center" class="footer-padding">
         <v-divider class="footer-padding"></v-divider>
-        <div>{{ new Date().getFullYear() }} — <strong>ToDo List</strong></div>
+        <div>{{ getYear }} — <strong>ToDo List</strong></div>
       </v-row>
     </v-footer>
   </v-layout>
@@ -28,17 +28,17 @@
 <style scoped>
 .footer-padding {
   width: 100%;
-  margin: 12px auto;
+  margin: 8px auto;
 }
 
 .footerContainer .v-btn .v-icon {
-  --v-icon-size-multiplier: 1.8 !important;
+  --v-icon-size-multiplier: 1.5 !important;
   color: #000;
 }
 
 .footer-nav {
   color: #000;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
 

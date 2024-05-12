@@ -6,13 +6,14 @@ const taskApi = new TaskApi()
 
 export default {
     components: {
-        TaskModal
+        TaskModal,
     },
     data() {
         return {
             task: null,
             isEditModalOpen: false,
-            taskId: this.$route.params.taskId
+            taskId: this.$route.params.taskId,
+            pageError: false,
         }
     },
 
@@ -25,6 +26,9 @@ export default {
         },
         dueDate() {
             return this.task.date?.slice(0, 10) || "none"
+        },
+        active() {
+            return this.task.status === 'active'
         }
     },
 
@@ -74,13 +78,16 @@ export default {
                 })
         },
         statusChange() {
-            this.task.status === 'active' ? this.task.status = 'done' : this.task.status = 'active';
-            this.toggleLoading()
+            const updatedTask = {
+                ...this.task,
+                status: this.active ? 'done' : 'active'
+            }
             taskApi
-                .updateTask(this.task)
-                .then((updatedTask) => {
+                .updateTask(updatedTask)
+                .then(() => {
+                    this.task = updatedTask
                     let message;
-                    if (updatedTask.status === 'done') {
+                    if (this.task.status === 'done') {
                         message = 'The task is Done successfully!'
                     }
                     else {
@@ -89,12 +96,34 @@ export default {
                     this.$toast.success(message)
                 })
                 .catch(this.handleError)
-                .finally(() => {
-                    this.toggleLoading()
-                })
+
         },
+        // statusChange() {
+        //     this.task.status === 'active' ? this.task.status = 'done' : this.task.status = 'active';
+        //     this.toggleLoading()
+
+        //     taskApi
+        //         .updateTask(this.task)
+        //         .then(() => {
+
+        //             let message;
+        //             if (this.task.status === 'done') {
+        //                 message = 'The task is Done successfully!'
+        //             }
+        //             else {
+        //                 message = 'The task is restored successfully!'
+        //             }
+        //             this.$toast.success(message)
+        //         })
+        //         .catch(this.handleError)
+        //         .finally(() => {
+        //             this.toggleLoading()
+        //         })
+
+        // },
         handleError(err) {
             this.$toast.error(err.message)
         },
+
     },
 }

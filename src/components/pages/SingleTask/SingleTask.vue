@@ -13,8 +13,8 @@
       <v-card-text> <b>Due Date: </b> {{ dueDate }} </v-card-text>
 
       <v-card-actions>
-        <v-btn :color="task.status === 'active' ? 'success' : 'info'" variant="elevated" @click="statusChange">
-          <v-icon v-if="task.status === 'active'" icon="mdi-check-outline" />
+        <v-btn :color="active ? 'success' : 'info'" variant="elevated" @click="statusChange">
+          <v-icon v-if="active" icon="mdi-check-outline" />
           <v-icon v-else icon="mdi-reload" />
         </v-btn>
         <v-btn color="warning" variant="elevated" @click="toggleTaskModal">
@@ -25,7 +25,14 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-    <h4 v-else>Task Not Found</h4>
+    <div v-else>
+      <p>Task not found</p>
+      <!-- <v-row align="center" justify="center">
+        <v-col cols="auto">
+          <img src="../../../assets/images/singleTaskDeleted.gif" alt="Page not found">
+        </v-col>
+      </v-row> -->
+    </div>
   </div>
 
 
@@ -40,6 +47,10 @@
   .pa-mob20 {
     padding-left: 10px !important;
     padding-right: 10px !important;
+  }
+
+  .slow-transition {
+    transition-delay: 1s;
   }
 }
 </style>

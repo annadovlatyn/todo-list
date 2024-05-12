@@ -10,9 +10,14 @@ export default {
             footerIcons: [
                 { icon: 'mdi-facebook', path: 'https://www.facebook.com' },
                 { icon: 'mdi-linkedin', path: 'https://linkedin.com/' },
-                { icon: 'mdi-instagram', path: 'https://www.instagram.com' },
+                { icon: 'mdi-github', path: 'https://github.com/annadovlatyn' },
                 { icon: 'mdi-twitter', path: 'https://www.twitter.com' }
             ]
+        }
+    },
+    computed: {
+        getYear() {
+            return new Date().getFullYear()
         }
     }
 }
