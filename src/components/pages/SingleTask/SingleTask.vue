@@ -13,8 +13,8 @@
       <v-card-text> <b>Due Date: </b> {{ dueDate }} </v-card-text>
 
       <v-card-actions>
-        <v-btn :color="task.status === 'active' ? 'success' : 'info'" variant="elevated" @click="statusChange">
-          <v-icon v-if="task.status === 'active'" icon="mdi-check-outline" />
+          <v-btn :color="active ? 'success' : 'info'" variant="elevated" @click="statusChange">
+          <v-icon v-if="active" icon="mdi-check-outline" />
           <v-icon v-else icon="mdi-reload" />
         </v-btn>
         <v-btn color="warning" variant="elevated" @click="toggleTaskModal">
