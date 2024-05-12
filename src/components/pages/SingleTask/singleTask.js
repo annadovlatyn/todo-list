@@ -64,12 +64,12 @@ export default {
         },
 
         statusChange() {
-            const updatedTask = {
+            const editedTask = {
                 ...this.task,
                 status: this.active ? 'done' : 'active'
             }
             taskApi
-                .updateTask(updatedTask)
+                .updateTask(editedTask)
                 .then((updatedTask) => {
                     this.task = updatedTask
                     let message;
