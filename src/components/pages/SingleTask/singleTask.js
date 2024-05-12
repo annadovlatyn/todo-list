@@ -25,6 +25,9 @@ export default {
         dueDate() {
             return this.task.date?.slice(0, 10) || "none"
         }
+        active() {
+            return this.task.status === 'active'
+        }
     },
 
     methods: {
@@ -60,12 +63,16 @@ export default {
                 .catch(this.handleError)
         },
         statusChange() {
+            const updatedTask = {
+                ...this.task,
+                status: this.active ? 'done' : 'active'
+            }
             taskApi
-                .updateTask(this.task)
-                .then((updatedTask) => {
-                    this.task.status === 'active' ? this.task.status = 'done' : this.task.status = 'active';
+                .updateTask(updatedTask)
+                .then(() => {
+                    this.task = updatedTask
                     let message;
-                    if (updatedTask.status === 'done') {
+                    if (this.task.status === 'done') {
                         message = 'The task is Done successfully!'
                     }
                     else {
@@ -74,6 +81,7 @@ export default {
                     this.$toast.success(message)
                 })
                 .catch(this.handleError)
+
         },
         handleError(err) {
             this.$toast.error(err.message)
