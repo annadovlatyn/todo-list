@@ -4,7 +4,6 @@ import TaskApi from '../../../utils/taskApi.js'
 import ConfirmDialog from '../../ConfirmDialog/ConfirmDialog.vue'
 import { mapMutations } from 'vuex'
 
-
 const taskApi = new TaskApi()
 
 export default {
@@ -19,7 +18,7 @@ export default {
             tasks: [],
             editingTask: null,
             selectedTasks: new Set(),
-            isDeleteDialogOpen: false
+            isDeleteDialogOpen: false,
         }
     },
     created() {
@@ -31,7 +30,6 @@ export default {
             if (newValue) {
                 this.isTaskModalOpen = true
             }
-
         },
         isTaskModalOpen(isOpen) {
             if (!isOpen && this.editingTask) {
@@ -45,7 +43,8 @@ export default {
         },
         confirmDialogText() {
             return `You are going to delete ${this.selectedTasks.size} task(s), are you sure?`
-        }
+        },
+
     },
     methods: {
         ...mapMutations(['toggleLoading']),
@@ -92,11 +91,14 @@ export default {
                     this.toggleLoading()
                 })
         },
-        onTaskStatusChange(editedTask) {
-            editedTask.status === 'active' ? editedTask.status = 'done' : editedTask.status = 'active';
+        onTaskStatusChange(task) {
             this.toggleLoading()
+            const updatedTask = {
+                ...task,
+                status: task.status === 'active' ? 'done' : 'active'
+            }
             taskApi
-                .updateTask(editedTask)
+                .updateTask(updatedTask)
                 .then((updatedTask) => {
                     this.findAndReplaceTask(updatedTask)
                     let message;
@@ -142,6 +144,7 @@ export default {
             this.isDeleteDialogOpen = !this.isDeleteDialogOpen
             if (!this.isDeleteDialogOpen) {
                 this.selectedTasks.clear()
+                this.$router.go(0)
             }
         },
         onSelectedTasksDelete() {

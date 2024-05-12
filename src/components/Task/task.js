@@ -19,7 +19,8 @@ export default {
         },
         active() {
             return this.data.status === 'active'
-        }
+        },
+
     },
     methods: {
         onEdit() {
@@ -34,12 +35,5 @@ export default {
         onSelect() {
             this.$emit('taskSelect')
         },
-        //   onStatusChange(status) {
-        //     const updatedTask = {
-        //       ...this.data,
-        //       status
-        //     }
-        //     this.$emit('statusChange', updatedTask)
-        //   }
     },
 }

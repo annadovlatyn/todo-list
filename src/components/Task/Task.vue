@@ -1,5 +1,4 @@
 <template>
-
   <v-card class="mx-auto my-8 w-100" elevation="10" max-width="344">
     <v-card-item class="pa-2 pl-4">
       <v-checkbox @click="onSelect" :checked="isSelected" class="mb-n6 mx-n1"></v-checkbox>
@@ -14,8 +13,8 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn :color="data.status === 'active' ? 'success' : 'info'" variant="elevated" @click="statusChange">
-        <v-icon v-if="data.status === 'active'" icon="mdi-check-outline" />
+      <v-btn :color="active ? 'success' : 'info'" variant="elevated" @click="statusChange">
+        <v-icon v-if="active" icon="mdi-check-outline" />
         <v-icon v-else icon="mdi-reload" />
       </v-btn>
       <v-btn color="warning" variant="elevated" @click="onEdit">
@@ -26,13 +25,10 @@
       </v-btn>
     </v-card-actions>
   </v-card>
-
-
-
-
 </template>
 
 <script src="./task.js"></script>
+
 <style scoped>
 .description {
   white-space: nowrap;
