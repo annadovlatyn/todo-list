@@ -71,8 +71,6 @@ export default {
                 ...task,
                 status: task.status === 'active' ? 'done' : 'active'
             }
-            // editedTask.status === 'active' ? editedTask.status = 'done' : editedTask.status = 'active';
-
             taskApi
                 .updateTask(updatedTask)
                 .then((updatedTask) => {
