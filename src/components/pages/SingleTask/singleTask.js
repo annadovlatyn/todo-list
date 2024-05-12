@@ -62,6 +62,7 @@ export default {
                 })
                 .catch(this.handleError)
         },
+
         statusChange() {
             const updatedTask = {
                 ...this.task,
