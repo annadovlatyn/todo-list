@@ -66,11 +66,15 @@ export default {
                 })
                 .catch(this.handleError)
         },
-        onTaskStatusChange(editedTask) {
-            editedTask.status === 'active' ? editedTask.status = 'done' : editedTask.status = 'active';
+        onTaskStatusChange(task) {
+            const updatedTask = {
+                ...task,
+                status: task.status === 'active' ? 'done' : 'active'
+            }
+            // editedTask.status === 'active' ? editedTask.status = 'done' : editedTask.status = 'active';
 
             taskApi
-                .updateTask(editedTask)
+                .updateTask(updatedTask)
                 .then((updatedTask) => {
                     this.findAndReplaceTask(updatedTask)
                     let message;
