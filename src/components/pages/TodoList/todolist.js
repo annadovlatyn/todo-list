@@ -1,6 +1,6 @@
-import TaskModal from '../TaskModal/TaskModal.vue'
-import Task from '../Task/Task.vue'
-import TaskApi from '../../utils/taskApi.js'
+import TaskModal from '../../TaskModal/TaskModal.vue'
+import Task from '../../Task/Task.vue'
+import TaskApi from '../../../utils/taskApi.js'
 
 
 const taskApi = new TaskApi()
@@ -66,12 +66,13 @@ export default {
                 })
                 .catch(this.handleError)
         },
-        onTaskStatusChange(editedTask) {
-           
-            editedTask.status === 'active' ? editedTask.status = 'done' : editedTask.status = 'active';
-
+        onTaskStatusChange(task) {
+            const updatedTask = {
+                ...task,
+                status: task.status === 'active' ? 'done' : 'active'
+            }
             taskApi
-                .updateTask(editedTask)
+                .updateTask(updatedTask)
                 .then((updatedTask) => {
                     this.findAndReplaceTask(updatedTask)
                     let message;
@@ -89,7 +90,6 @@ export default {
             const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
             this.tasks[index] = updatedTask
         },
-
         handleError(err) {
             this.$toast.error(err.message)
         },
