@@ -8,10 +8,10 @@
             </v-col>
         </v-row>
         <v-row align="center" justify="center">
-            <v-col cols="auto">
-                <v-btn color="success">
-                    <RouterLink to="/">Go Back Home</RouterLink>
-                </v-btn>
+            <v-col cols="auto" class="ma-2">
+                <RouterLink to="/"><v-btn color="success">
+                        Go Back Home
+                    </v-btn></RouterLink>
             </v-col>
         </v-row>
     </v-container>
@@ -21,7 +21,7 @@
 
 <style scoped>
 .error-image {
-    max-width: 500px;
+    max-width: 450px;
     margin: 0 auto;
 }
 

@@ -5,19 +5,22 @@ const formApi = new FormApi()
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default {
-    data: () => ({
-        name: '',
-        email: '',
-        message: '',
-        nameRules: [(v) => !!v || 'Name is required'],
-        emailRules: [(v) => !!v || 'Email is required', (v) => emailRegex.test(v) || 'Invalid email']
-    }),
+    data() {
+        return {
+            name: '',
+            email: '',
+            message: '',
+            nameRules: [(v) => !!v || 'Name is required'],
+            emailRules: [(v) => !!v || 'Email is required', (v) => emailRegex.test(v) || 'Invalid email'],
+            emailSent: false,
+            messageSent: {}
+        }
+    },
 
     methods: {
         ...mapMutations(['toggleLoading']),
         async sendForm() {
             const isValid = await this.validate()
-            console.log('isValid', isValid)
             if (!isValid) {
                 return
             }
@@ -28,14 +31,16 @@ export default {
             }
             formApi.sendForm(form)
                 .then(() => {
-                    console.log('then --- Email was sent', form)
+                    console.log('then got object', form)
+                    this.messageSent = { ...form }
+                    this.emailSent = true;
                     this.reset()
                     this.$toast.success('Your message has been sent!')
                 })
                 .catch(this.handleError)
                 .finally(() => {
-                    console.log('finally --- Email was sent', form)
-                    this.toggleLoading()
+                    console.log('finally - messageSent ', this.messageSent)
+
                 })
             // send form
             // formApi.sendForm(form)
@@ -53,5 +58,9 @@ export default {
             this.$toast.error(err.message)
             console.log('catch --- Error')
         },
+        toggleMessage() {
+            this.emailSent = !this.emailSent
+        }
+
     }
 }

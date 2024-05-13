@@ -2,9 +2,9 @@
   <v-card class="mx-auto my-8 w-100" elevation="10" max-width="344">
     <v-card-item class="pa-2 pl-4">
       <v-checkbox @click="onSelect" :checked="isSelected" class="mb-n6 mx-n1"></v-checkbox>
-      <v-card-title> {{ data.title }}</v-card-title>
+      <v-card-title class="text-h5"> {{ data.title }}</v-card-title>
     </v-card-item>
-    <v-card-text class="pa-2 pl-4 description">{{ data.description }} </v-card-text>
+    <v-card-text class="pa-2 pl-4 description text-body-1">{{ data.description }} </v-card-text>
     <v-card-text class="pa-2 pl-4"> <b>Status: </b>{{ data.status }} </v-card-text>
     <v-card-text class="pa-2 pl-4"> <b>Created At: </b> {{ createdAt }} </v-card-text>
     <v-card-text class="pa-2 pl-4"> <b>Due Date: </b> {{ dueDate }} </v-card-text>
