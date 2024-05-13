@@ -76,6 +76,7 @@ export default {
                     this.toggleLoading()
                 })
         },
+
         statusChange() {
             const editedTask = {
                 ...this.task,
