@@ -1,4 +1,3 @@
-
 export default {
 
     props: {
@@ -6,6 +5,10 @@ export default {
             type: Object,
             required: true
         },
+        isSelected: {
+            type: Boolean,
+            default: false
+        }
     },
     computed: {
         createdAt() {
@@ -16,7 +19,8 @@ export default {
         },
         active() {
             return this.data.status === 'active'
-        }
+        },
+
     },
     methods: {
         onEdit() {
@@ -27,6 +31,9 @@ export default {
         },
         statusChange() {
             this.$emit('taskStatus')
-        }
+        },
+        onSelect() {
+            this.$emit('taskSelect')
+        },
     },
 }

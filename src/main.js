@@ -10,7 +10,7 @@ import * as directives from 'vuetify/directives'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import App from './App.vue'
 import { router } from './router.js'
-
+import { store } from './store.js'
 
 
 const vuetify = createVuetify({
@@ -27,8 +27,9 @@ const vuetify = createVuetify({
 })
 
 const app = createApp(App);
-app.use(vuetify);
+app.use(vuetify)
 app.use(router)
+app.use(store)
 app.use(ToastPlugin, {
     type: 'success',
     duration: 5000,
