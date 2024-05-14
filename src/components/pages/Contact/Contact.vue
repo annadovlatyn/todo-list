@@ -2,7 +2,7 @@
     <v-container>
         <v-row align="center" justify="center">
             <v-col cols="12">
-                <h1 align="center" class="text-h3">Contact us</h1>
+                <h1 align="center" class="text-h3 text-uppercase">Contact us</h1>
             </v-col>
         </v-row>
         <v-row align="center" justify="center">
@@ -32,7 +32,7 @@
                     <v-card-item class="pa-2 pl-4">
                         <v-card-title>Your email has been sent!</v-card-title>
                     </v-card-item>
-                    <v-card-text class="pa-2 pl-4"> <b>Name: </b>{{ this.messageSent.name }} </v-card-text>
+                    <v-card-text class="pa-2 pl-4 "> <b>Name: </b>{{ this.messageSent.name }} </v-card-text>
                     <v-card-text class="pa-2 pl-4"> <b>Email: </b> {{ this.messageSent.email }} </v-card-text>
                     <v-card-text class="pa-2 pl-4"> <b>Message: </b></v-card-text>
                     <v-card-text class="pa-2 pl-4 mb-4"> {{ this.messageSent.message }}</v-card-text>

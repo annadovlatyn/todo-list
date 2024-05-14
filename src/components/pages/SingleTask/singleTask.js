@@ -82,6 +82,7 @@ export default {
                 ...this.task,
                 status: this.active ? 'done' : 'active'
             }
+            this.toggleLoading()
             taskApi
                 .updateTask(editedTask)
                 .then((updatedTask) => {
@@ -96,6 +97,9 @@ export default {
                     this.$toast.success(message)
                 })
                 .catch(this.handleError)
+                .finally(() => {
+                    this.toggleLoading()
+                })
 
         },
         handleError(err) {

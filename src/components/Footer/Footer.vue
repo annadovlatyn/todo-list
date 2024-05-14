@@ -2,7 +2,7 @@
   <v-layout class="footerContainer">
     <v-footer class="bg-grey-lighten-2 d-flex flex-column">
       <v-row justify="center" no-gutters class="pa-1 mb-1">
-        <v-btn class="py-1" v-for="navLink in navLinks" :key="navLink.title" variant="text">
+        <v-btn v-for="navLink in navLinks" :key="navLink.title" variant="text">
           <RouterLink :to="navLink.path" class="text-decoration-none active-link footer-nav">{{ navLink.title }}
           </RouterLink>
         </v-btn>

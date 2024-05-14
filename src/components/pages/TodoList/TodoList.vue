@@ -30,27 +30,3 @@
 
 <script src="./todolist.js"></script>
 
-<style scoped>
-.delete-selected-btn {
-  position: fixed;
-  right: -140px;
-  bottom: 40px;
-  z-index: 200;
-}
-
-.delete-selected-btn:hover {
-  animation-name: btn-animation;
-  animation-duration: 0.8s;
-  right: 10px;
-}
-
-@keyframes btn-animation {
-  from {
-    right: -140px;
-  }
-
-  to {
-    right: 20px;
-  }
-}
-</style>

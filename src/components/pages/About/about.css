@@ -1,0 +1,28 @@
+.about-container {
+    max-width: 750px;
+    margin: 0 auto 25px;
+}
+
+.article-about h5 {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 22px;
+    margin: 15px 0;
+}
+
+.article-about p {
+    margin: 5px 0;
+}
+
+.about-us-articles {
+    margin: 0px auto;
+    max-width: 490px;
+    text-align: left;
+}
+
+.about-us-articles h6 {
+    font-size: 17px;
+    line-height: 22px;
+    font-weight: bold;
+    margin: 15px 0;
+}
