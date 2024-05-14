@@ -14,8 +14,6 @@
         <v-card-text class="text-body-1"> <b>Created At: </b> {{ createdAt }} </v-card-text>
         <v-card-text class="text-body-1"> <b>Due Date: </b> {{ dueDate }} </v-card-text>
       </div>
-
-      <!-- <div> -->
       <v-card-actions>
         <div class="d-flex flex-wrap ga-3 w-100 text-center justify-center">
           <v-btn :color="active ? 'success' : 'info'" variant="elevated" @click="statusChange">
@@ -31,9 +29,9 @@
         </div>
       </v-card-actions>
     </v-card>
-    <!-- <div v-else>
+    <div v-else>
       <p class="text-center text-h5">Task not found</p>
-    </div> -->
+    </div>
   </div>
 
 
@@ -66,7 +64,5 @@
   .slow-transition {
     transition-delay: 1s;
   }
-
-
 }
 </style>
