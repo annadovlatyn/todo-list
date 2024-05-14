@@ -3,6 +3,8 @@ import Task from '../../Task/Task.vue'
 import TaskApi from '../../../utils/taskApi.js'
 import ConfirmDialog from '../../ConfirmDialog/ConfirmDialog.vue'
 import { mapMutations } from 'vuex'
+import './todoList.css'
+
 
 const taskApi = new TaskApi()
 
@@ -92,13 +94,12 @@ export default {
                 })
         },
         onTaskStatusChange(task) {
-            this.toggleLoading()
             const updatedTask = {
                 ...task,
                 status: task.status === 'active' ? 'done' : 'active'
             }
+            this.toggleLoading()
             taskApi
-                .updateTask(updatedTask)
                 .updateTask(updatedTask)
                 .then((updatedTask) => {
                     this.findAndReplaceTask(updatedTask)
@@ -148,6 +149,7 @@ export default {
             }
         },
         onSelectedTasksDelete() {
+            this.toggleLoading()
             taskApi
                 .deleteTasks([...this.selectedTasks])
                 .then(() => {
